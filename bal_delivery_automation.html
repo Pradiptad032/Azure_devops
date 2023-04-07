@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+	<link rel="stylesheet" href="styles.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <title>BAL View</title>
+	<h2><u>BAL Delivery Dash Board</u></h2>
+	<br>
+	<p id="demo"></p>
+	<img src="BT.png" id="img1"><br>
+	<img src="BT.png" id="img2"><br>
+	
+	<script  type="text/javascript" src="automate.js"></script>
+	   </head>
+    <body>
+<nav class="navbar navbar-expand-sm bg-secondary navbar-dark">
+  <ul class="navbar-nav">
+    <li class="nav-item active">
+      <a class="nav-link" href="#">BAL Overview</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="#">Automation/PI</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="#">H/W and S/W</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="#">Interfaces</a>
+    </li>
+	<li class="nav-item dropdown">
+      <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+        BAL Operations
+      </a>
+      <div class="dropdown-menu">
+        <a class="dropdown-item" href="#">Manage Billing Account</a>
+        <a class="dropdown-item" href="#">Manage Billing Order</a>
+        <a class="dropdown-item" href="#">Manage Payment</a>
+      </div>
+    </li>
+  </ul>
+       <form id="search" class="navbar-form navbar-right" action="/action_page.php">
+      <div  class="input-group">
+        <input  type="text" class="form-control" placeholder="Search" name="search">
+     
+          <button type="submit" class="btn btn-success">Submit</button>
+    
+      </div>
+    </form>
+</nav><br><br><br><br>
+
+    <div class="category_div" class = "form-control selcls" id="category_div">
+	     <span class="label label-primary" style="font-size:20px;color: #3426A4;text-shadow: #FFFCA8 2px 2px 0px, #9C9C9C 4px 4px 0px;font-weight:bold">Release Name</span>
+        <select id="source" name="source" onchange="javascript: dynamicsprint(this.options[this.selectedIndex].value);dynamicsprint1(this.options[this.selectedIndex].value);">
+        <option value="Select Release">Select Release</option>
+        <option value="CCP56">CCP56</option>
+        <option value="CCP57">CCP57</option>
+        </select>
+    </div>
+	<br>
+	<br>
+	<p id="txt1"></p>
+    <div class="sub_category_div" id="sub_category_div">   
+        <span class="label label-primary" style="font-size:20px;color: #3426A4;text-shadow: #FFFCA8 2px 2px 0px, #9C9C9C 4px 4px 0px;font-weight:bold">Sprint Name</span>
+        <select id="status" name="status" onchange="javascript: carryvalue(this.options[this.selectedIndex].innerHTML)">
+		    <option id ="op_1" value="s0" >Select Sprint</option>
+            <option id ="op_2" value="s1"></option>
+            <option id ="op_3" value="s2"></option>
+			<option id ="op_4" value="s3"></option>
+			<option id ="op_5" value="s4"></option>
+        </select>
+		<br>
+		<br>
+		<p id="txt2"></p>
+		<br>
+    </div>
+    <div class="category_div" id="category_div">
+	    <span class="label label-primary" style="font-size:20px;color: #3426A4;text-shadow: #FFFCA8 2px 2px 0px, #9C9C9C 4px 4px 0px;font-weight:bold;">Select Option</span>
+        <select id="opt" name="opt" onchange="javascript: validateForm(this.options[this.selectedIndex].value);">
+        <option value="Select Option"></option>
+        <option id="ro" value="READONLY"></option>
+        <option id="up" value="UPDATE"></option>
+        </select>
+		
+    </div>
+	<!--script type="text/javascript" language="JavaScript" src="automate1_option.js></script-->
+        <br>
+		<br>
+		
+	 <!--div class="category_div" id="category_div">User Action:
+        <select id="opt1" name="opt1">
+		<option value="select_view_option"></option>
+		<option value="select_update_option"></option>
+        <option value="resource_selector"></option>
+        <option value="capability_selector"></option>
+        <option value="dependency_selector"></option>
+		<option value="perftest_selector"></option>
+		<option value="test_only"></option>
+		<option value="update"></option>
+        </select>
+    </div-->
+<form id ="frm" name="myForm"  style = "visibility :hidden">
+  <span class="label label-primary" style="font-size:20px;color:darkblue;font-weight:bold">Username:</span> <input type="text" name="fname">
+  <span class="label label-primary" style="font-size:20px;color:darkblue;font-weight:bold">Password:</span> <input type="password" name="fname1">
+  <input id = "sb1" type="button" value="Submit">
+</form> 
+<div class="container">
+  <button id = "btn10" type="button" class="btn btn-success" style="visibility:hidden">story_selector</button>
+  <button id = "btn1" type="button" class="btn btn-primary" style="visibility:hidden" onclick="call_func()">resource_selector</button>
+  <button id = "btn2" type="button" class="btn btn-secondary" style="visibility:hidden">capability_selector</button>
+  <button id = "btn3" type="button" class="btn btn-success" style="visibility:hidden">dependency_selector</button>
+  <button id = "btn4" type="button" class="btn btn-info" style="visibility:hidden">perftest_selector</button>
+  <button id = "btn5" type="button" class="btn btn-warning" style="visibility:hidden">test_only</button>
+</div>  
+<div class="container1">
+  <button id = "btn6" type="button" class="btn btn-danger" style="visibility:hidden">Update BTR</button>
+  <button id = "btn7" type="button" class="btn btn-dark"style="visibility:hidden">Update Effort</button>
+  <button id = "btn8" type="button" class="btn btn-primary" style="visibility:hidden">Update resource</button>
+  <button id = "btn9" type="button" class="btn btn-warning" style="visibility:hidden">Update Test Only</button>      
+</div><br><br><br>
+
+
+
+    </body>
+</html>
